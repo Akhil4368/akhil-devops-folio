@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import portfolioImage from "@/assets/project-portfolio.jpg";
-import fullstackImage from "@/assets/project-fullstack.jpg";
+import userManagementImage from "@/assets/project-user-management.jpg";
 
 const Portfolio = () => {
   const projects = [
@@ -11,12 +11,14 @@ const Portfolio = () => {
       description: "Modern, responsive portfolio website showcasing web development skills with smooth animations and clean design.",
       image: portfolioImage,
       technologies: ["React", "TypeScript", "Tailwind CSS"],
+      githubUrl: "https://github.com/Akhil4368",
     },
     {
-      title: "Containerized Full Stack App",
-      description: "Full-stack MERN application deployed using Docker containerization with CI/CD pipeline integration and AWS hosting.",
-      image: fullstackImage,
-      technologies: ["Docker", "AWS", "MongoDB", "Node.js"],
+      title: "User Management Application",
+      description: "Full-stack containerized application for managing users with CRUD operations, built with MERN stack and deployed using Docker.",
+      image: userManagementImage,
+      technologies: ["Docker", "MongoDB", "Express", "React", "Node.js"],
+      githubUrl: "https://github.com/Akhil4368/containerized-fullstack-app",
     },
   ];
 
@@ -44,13 +46,14 @@ const Portfolio = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6 gap-4">
-                  <Button variant="hero" size="sm" className="gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    View Live
-                  </Button>
-                  <Button variant="outline" size="sm" className="gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="gap-2"
+                    onClick={() => window.open(project.githubUrl, '_blank')}
+                  >
                     <Github className="w-4 h-4" />
-                    Code
+                    View Code
                   </Button>
                 </div>
               </div>

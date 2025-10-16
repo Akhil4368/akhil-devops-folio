@@ -4,11 +4,31 @@ import { Mail, Phone, Github, Linkedin, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success("Message sent! I'll get back to you soon.");
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.sendForm(
+        'service_bc88d6p',
+        'template_gg8ka1x',
+        e.currentTarget,
+        'bFMViRuH75vG8Ymcd'
+      );
+      toast.success("Message sent! I'll get back to you soon.");
+      e.currentTarget.reset();
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -89,6 +109,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Input
+                  name="user_name"
                   placeholder="Your Name"
                   required
                   className="bg-background border-border"
@@ -97,6 +118,7 @@ const Contact = () => {
               <div>
                 <Input
                   type="email"
+                  name="user_email"
                   placeholder="Your Email"
                   required
                   className="bg-background border-border"
@@ -104,6 +126,7 @@ const Contact = () => {
               </div>
               <div>
                 <Input
+                  name="subject"
                   placeholder="Subject"
                   required
                   className="bg-background border-border"
@@ -111,13 +134,14 @@ const Contact = () => {
               </div>
               <div>
                 <Textarea
+                  name="message"
                   placeholder="Your Message"
                   required
                   className="bg-background border-border min-h-32"
                 />
               </div>
-              <Button type="submit" variant="hero" className="w-full gap-2">
-                Send Message
+              <Button type="submit" variant="hero" className="w-full gap-2" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Message"}
                 <Send className="w-4 h-4" />
               </Button>
             </form>

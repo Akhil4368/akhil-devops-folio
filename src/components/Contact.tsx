@@ -47,8 +47,8 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "#" },
-    { icon: Linkedin, label: "LinkedIn", href: "#" },
+    { icon: Github, label: "GitHub", href: "https://github.com/Akhil4368" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/akhil-pathania-991361267" },
   ];
 
   return (

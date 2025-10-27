@@ -1,12 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
+import portfolioWebsiteImage from "@/assets/portfolio-website.png";
 
 const Portfolio = () => {
   const projects = [
     {
       title: "Portfolio Website",
       description: "Modern, responsive portfolio website showcasing web development skills with smooth animations and clean design.",
+      image: portfolioWebsiteImage,
       technologies: ["React", "TypeScript", "Tailwind CSS"],
       githubUrl: "https://github.com/Akhil4368",
     },
@@ -33,8 +35,17 @@ const Portfolio = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="hover:shadow-2xl transition-all duration-300 hover:scale-105 border-border bg-card"
+              className="overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 border-border bg-card group"
             >
+              {project.image && (
+                <div className="relative overflow-hidden h-64">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+              )}
               <div className="p-6 space-y-4">
                 <h3 className="text-2xl font-bold">{project.title}</h3>
                 <p className="text-muted-foreground">{project.description}</p>
